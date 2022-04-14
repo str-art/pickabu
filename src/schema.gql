@@ -1,0 +1,149 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: Int!
+  email: String!
+}
+
+type Post {
+  id: Int
+  text: String!
+  title: String!
+  dateCreated: Timestamp!
+  comments(first: Int = 10, offset: Int = 0, sort: SortOptions!): [Comment!]
+  totalComments: Int!
+  author: User!
+  likes: Int!
+  dislikes: Int!
+  tag: [String]
+  files: [File!]
+}
+
+"""
+`Date` type as integer. Type represents date and time as number of milliseconds from start of UNIX epoch.
+"""
+scalar Timestamp
+
+input SortOptions {
+  by: SortingOptionsColumn = DATE
+  order: SortOptionsOrder = DESC
+}
+
+enum SortingOptionsColumn {
+  LIKES
+  DATE
+}
+
+enum SortOptionsOrder {
+  ASC
+  DESC
+}
+
+type File {
+  key: String!
+}
+
+type Comment {
+  id: Int!
+  text: String!
+  dateCreated: Timestamp!
+  author: User!
+  files: [File!]!
+  likes: Int!
+  dislikes: Int!
+}
+
+type access_token {
+  access_token: String!
+  user: User!
+}
+
+type Query {
+  posts(first: Int = 10, offset: Int = 0, sort: SortOptions = {by: DATE, order: DESC}, title: String = "", tags: [String!], filter: FilterOptions): [Post!]!
+  post(id: Int!): Post!
+  login(email: String!, password: String!): access_token!
+  getSaved: [Saved!]
+}
+
+enum FilterOptions {
+  newest
+  hottest
+  best
+}
+
+union Saved = Post | Comment
+
+type Mutation {
+  editPost(editPostInput: ChangePostInput!): Post!
+  createPost(createPostInput: PostInput!): Post!
+  reactToPost(
+    """id of entity to react"""
+    id: Int!
+    type: ReactionType!
+  ): Post!
+  deletePost(id: Float!): Post!
+  reactToComment(
+    """id of entity to react"""
+    id: Int!
+    type: ReactionType!
+  ): Comment!
+  createComment(commentInput: CommentInput!): Comment!
+  editComment(editCommentInput: ChangeCommentInput!): Comment!
+  deleteComment(id: Float!): Comment
+  register(newUserInput: NewUser!): access_token!
+  saveEntity(saveInput: SaveInput!): Saved
+}
+
+input ChangePostInput {
+  id: Int!
+  text: String
+  title: String
+  tags: [String!]
+  deleteFiles: [String!]
+  addFiles: [Upload!]
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+input PostInput {
+  text: String!
+  title: String!
+  tags: [String!]
+  files: [Upload!]
+}
+
+enum ReactionType {
+  like
+  dislike
+}
+
+input CommentInput {
+  text: String!
+  postId: Int!
+  files: [Upload!]
+}
+
+input ChangeCommentInput {
+  id: Int!
+  text: String!
+  addFiles: [Upload!]
+  deleteFiles: [String!]
+}
+
+input NewUser {
+  email: String!
+  password: String!
+}
+
+input SaveInput {
+  id: Int!
+  entity: WhatToSave!
+}
+
+enum WhatToSave {
+  COMMENT
+  POST
+}
