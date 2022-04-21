@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
 import { JwtModule } from "@nestjs/jwt";
-import { DatabaseModule } from "src/database.module.ts/db.module";
+import { DatabaseModule } from "src/database/db.module";
 import { AuthResolver } from "./auth.resolver";
 import { AuthService } from "./auth.service";
 import { AuthGuard } from "./guards/auth.guard";

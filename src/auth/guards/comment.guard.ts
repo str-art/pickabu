@@ -25,7 +25,6 @@ export class CommentGuard implements CanActivate{
             ctx.getContext().req.comment = comment;
             return true
         }catch(err){
-            console.log(err)
             if(info.fieldName == 'DeleteComment'){
                 try{
                     const {comments} = await this.postRepo.findOneOrFail({
@@ -51,7 +50,6 @@ export class CommentGuard implements CanActivate{
                     ctx.getContext().req.comment = comments[0]
                     return true
                 }catch(err){
-                    console.log(err)
                     return false
                 }
             }

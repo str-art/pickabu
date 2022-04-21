@@ -29,6 +29,5 @@ export class FileSubscriber implements EntitySubscriberInterface<File>{
     async beforeRemove(event: RemoveEvent<File>){
         const key = event.entity.key;
         await this.storage.delete(key);
-        console.log(key,"removed")
     }
 }

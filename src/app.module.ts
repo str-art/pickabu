@@ -5,7 +5,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { join } from 'path';
 import { AuthModule } from './auth/auth.module';
 import { CommentModule } from './comment/comment.module';
-import { DatabaseModule } from './database.module.ts/db.module';
+import { DatabaseModule } from './database/db.module';
 import { FileModule } from './file/file.module';
 import { PostModule } from './post/post.module';
 import { SavedModule } from './saved/saved.module';

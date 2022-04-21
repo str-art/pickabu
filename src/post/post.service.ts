@@ -1,5 +1,5 @@
 import { Inject, Injectable, InternalServerErrorException, NotFoundException, UnauthorizedException } from "@nestjs/common";
-import { FileUpload, Upload } from "graphql-upload";
+import { FileUpload } from "graphql-upload";
 import { FileService } from "src/file/file.service";
 import { TagService } from "src/tag/tag.service";
 import { User } from "src/user/user.entity";
@@ -59,7 +59,6 @@ export class PostService{
         try{
             result = await this.viewRepo.find(options)
         }catch(err){
-            console.log(err)
             throw new InternalServerErrorException('Failed to load posts')
         }
 

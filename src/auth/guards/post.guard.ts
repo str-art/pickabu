@@ -33,7 +33,6 @@ export class PostGuard implements CanActivate{
             ctx.getContext().req.post = post;
             return true  
         }catch(err){
-            console.log(err)
             return false
         }
     }

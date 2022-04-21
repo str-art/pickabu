@@ -40,13 +40,14 @@ export class FileService{
         let options: FindOptionsWhere<File> = {};
         if(entity.postId){
             options.commentId=entity.id;
-        }else{options.postId = entity.id}
+        }else{
+            options.postId = entity.id
+        }
         let files: File[];
         try{
             files = await this.repo.findBy(options)
         }catch(err){
-            console.log(err)
-            return
+            throw new InternalServerErrorException('Something went wrong')
         }
         return files;
     }

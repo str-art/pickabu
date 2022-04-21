@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common";
-import { DatabaseModule } from "src/database.module.ts/db.module";
+import { DatabaseModule } from "src/database/db.module";
 import { ReactionService } from "./reaction.service";
 
 @Module({

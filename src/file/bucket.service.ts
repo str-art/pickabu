@@ -19,7 +19,6 @@ export class BucketService extends S3Client {
         try{
             await this.send(new PutObjectCommand({Bucket:process.env.S3_BUCKET,Key:`${filename}`,Body:file}))
         }catch(err){
-            console.log(err)
             throw new InternalServerErrorException('Failed to save file')
         }
     }
@@ -29,7 +28,6 @@ export class BucketService extends S3Client {
         try{
             a = await this.send(new DeleteObjectCommand({Bucket:process.env.S3_BUCKET,Key:key}))
         }catch(err){
-            console.log(err)
             throw new InternalServerErrorException(`Failed to delete object`)
         }
         return a
@@ -42,7 +40,6 @@ export class BucketService extends S3Client {
             
         }
         catch(err){
-            console.log(err)
             throw new InternalServerErrorException('Failed to load object')
         }
         return object

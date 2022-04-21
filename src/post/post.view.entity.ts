@@ -1,4 +1,3 @@
-
 import { ViewEntity, ViewColumn } from "typeorm";
 import { Post } from "./post.entity";
 
